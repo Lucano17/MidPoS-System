@@ -16,7 +16,7 @@ namespace PoS_Repository.DB
             _stringSql = _configuration.GetConnectionString("CadenaSql")!;
         }
 
-        public SqlConnection Get()
+        public SqlConnection GetSQLConnection()
         {
             return new SqlConnection(_stringSql);
         }
