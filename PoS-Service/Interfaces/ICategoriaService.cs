@@ -1,9 +1,8 @@
-﻿
-using PoS_Repository.Entities;
+﻿using PoS_Repository.Entities;
 
-namespace PoS_Repository.Interfaces
+namespace PoS_Service.Interfaces
 {
-    public interface ICategoriaRepository
+    public interface ICategoriaService
     {
         Task<List<Categorias>> Lista(string buscar = "");
         Task<string> Crear(Categorias objeto);

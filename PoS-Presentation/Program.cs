@@ -1,5 +1,12 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PoS_Repository;
+using PoS_Repository.Implementation;
+using PoS_Repository.Interfaces;
+using PoS_Service;
+using PoS_Service.Implementation;
+using PoS_Service.Interfaces;
 
 namespace PoS_Presentation
 {
@@ -22,6 +29,12 @@ namespace PoS_Presentation
             .ConfigureAppConfiguration((context, config) =>
             {
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            })
+            .ConfigureServices((context, services) =>
+            {
+                services.RegisterRepositoryDependencies();
+                services.RegisterServiceDependencies();
+
             });
     }
 }
