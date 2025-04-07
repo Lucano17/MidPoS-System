@@ -1,4 +1,6 @@
-﻿using PoS_Presentation.ViewModels;
+﻿using PoS_Presentation.Utilities;
+using PoS_Presentation.Utilities.Objetos;
+using PoS_Presentation.ViewModels;
 using PoS_Repository.Entities;
 using PoS_Service.Interfaces;
 using System;
@@ -50,48 +52,18 @@ namespace PoS_Presentation.Forms
         }
         private async void frm_Categoria_Load(object sender, EventArgs e)
         {
-            var btnEditarColumn = new DataGridViewButtonColumn();
-            btnEditarColumn.Text = "Editar";
-            btnEditarColumn.Name = "ColumnaAccion";
-            btnEditarColumn.HeaderText = "";
-            btnEditarColumn.UseColumnTextForButtonValue = true;
-            btnEditarColumn.Width = 50;
-            btnEditarColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-
-
-            CategoriasDGV.Columns.Add(btnEditarColumn);
-
-
+            CategoriasDGV.ImplementarConfiguracion("Editar");
             await MostrarCategorias();
 
-            CategoriasDGV.AllowUserToAddRows = false;
-            CategoriasDGV.AllowUserToDeleteRows = false;
-            CategoriasDGV.AllowUserToResizeColumns = true;
-            CategoriasDGV.AllowUserToResizeRows = false;
-            CategoriasDGV.AllowUserToOrderColumns = false;
-            CategoriasDGV.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            CategoriasDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            CategoriasDGV.MultiSelect = false;
-            CategoriasDGV.RowHeadersVisible = false;
-            CategoriasDGV.ReadOnly = true;
-            CategoriasDGV.BackgroundColor = Color.White;
-            CategoriasDGV.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
-            {
-                BackColor = Color.FromArgb(58, 49, 69),
-                SelectionBackColor = Color.FromArgb(58, 49, 69),
-                ForeColor = Color.FromArgb(255, 255, 255)
-            };
-            CategoriasDGV.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                SelectionBackColor = Color.FromArgb(191, 176, 209),
-                SelectionForeColor = Color.FromArgb(0, 0, 0),
-            };
-            CategoriasDGV.ColumnHeadersHeight = 30;
-            CategoriasDGV.EnableHeadersVisualStyles = false;
-            CategoriasDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             CategoriasDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            OpcionCmbBox[] itemsHabilitado = new OpcionCmbBox[]
+            {
+                new OpcionCmbBox {Texto = "Si", Valor = 1},
+                new OpcionCmbBox {Texto = "No", Valor = 0}
+            };
 
+            HabilitadoCmbBox.InsertarItems(itemsHabilitado);
         }
 
         private void CategoriasDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
