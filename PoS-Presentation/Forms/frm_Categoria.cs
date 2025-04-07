@@ -63,7 +63,16 @@ namespace PoS_Presentation.Forms
                 new OpcionCmbBox {Texto = "No", Valor = 0}
             };
 
+
+            var listaMedida = await _medidaService.Lista();
+            var items = listaMedida.Select(item => new OpcionCmbBox
+            {
+                Texto = item.Nombre,
+                Valor = item.Valor
+            }).ToArray();
             HabilitadoCmbBox.InsertarItems(itemsHabilitado);
+            MedidaNuevoCmbBox.InsertarItems(items);
+            MedidaEditarCmbBox.InsertarItems(items);
         }
 
         private void CategoriasDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
