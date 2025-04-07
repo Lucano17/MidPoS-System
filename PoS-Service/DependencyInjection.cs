@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PoS_Repository.DB;
 using PoS_Service.Implementation;
 using PoS_Service.Interfaces;
 
@@ -8,6 +9,7 @@ namespace PoS_Service
     {
         public static void RegisterServiceDependencies(this IServiceCollection services)
         {
+            services.AddSingleton<Connection>();
             services.AddTransient<IMedidaService, MedidaService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
         }

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PoS_Presentation.Forms;
 using PoS_Repository;
 using PoS_Repository.Implementation;
 using PoS_Repository.Interfaces;
@@ -22,7 +23,10 @@ namespace PoS_Presentation
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
-            Application.Run(new Form1());
+
+            var formService = host.Services.GetRequiredService<frm_Categoria>(); //Form1
+
+            Application.Run(formService);
         }
 
         static IHostBuilder CreateHostBuilder() => Host.CreateDefaultBuilder()
@@ -34,6 +38,7 @@ namespace PoS_Presentation
             {
                 services.RegisterRepositoryDependencies();
                 services.RegisterServiceDependencies();
+                services.AddTransient<frm_Categoria>(); //Form1
 
             });
     }

@@ -10,7 +10,7 @@ namespace PoS_Service.Implementation
         private readonly IMedidaRepository _medidaRepository;
         public MedidaService(IMedidaRepository medidaRepository)
         {
-            _medidaRepository = _medidaRepository;
+            _medidaRepository = medidaRepository;
         }
 
         public async Task<List<Medidas>> Lista()

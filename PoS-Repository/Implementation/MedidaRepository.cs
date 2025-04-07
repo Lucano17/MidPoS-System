@@ -21,7 +21,7 @@ namespace PoS_Repository.Implementation
             using (var con = _connection.GetSQLConnection())
             {
                 con.Open();
-                var cmd = new SqlCommand("sp_listaMedidas", con);
+                var cmd = new SqlCommand("sp_listaMedida", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 using (var dr = await cmd.ExecuteReaderAsync())
@@ -30,7 +30,7 @@ namespace PoS_Repository.Implementation
                     {
                         list.Add(new Medidas
                         {
-                            Id_Medidas = Convert.ToInt32(dr["Id_Medidas"]),
+                            Id_Medida = Convert.ToInt32(dr["Id_Medida"]),
                             Nombre = dr["Nombre"].ToString().Trim(),
                             Abreviatura = dr["Abreviatura"].ToString().Trim(),
                             Equivalente = dr["Equivalente"].ToString().Trim(),

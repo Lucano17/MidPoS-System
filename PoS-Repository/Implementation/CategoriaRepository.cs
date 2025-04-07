@@ -25,7 +25,7 @@ namespace PoS_Repository.Implementation
                 con.Open();
                 var cmd = new SqlCommand("sp_crearCategoria", con);
                 cmd.Parameters.AddWithValue("@Nombre", objeto.Nombre);
-                cmd.Parameters.AddWithValue("@Id_Medidas", objeto.RefMedida.Id_Medidas);
+                cmd.Parameters.AddWithValue("@Id_Medida", objeto.RefMedida.Id_Medida);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -51,9 +51,9 @@ namespace PoS_Repository.Implementation
             {
                 con.Open();
                 var cmd = new SqlCommand("sp_editarCategoria", con);
-                cmd.Parameters.AddWithValue("@Id_Categorias", objeto.Id_Categorias);
+                cmd.Parameters.AddWithValue("@Id_Categoria", objeto.Id_Categoria);
                 cmd.Parameters.AddWithValue("@Nombre", objeto.Nombre);
-                cmd.Parameters.AddWithValue("@Id_Medidas", objeto.RefMedida.Id_Medidas);
+                cmd.Parameters.AddWithValue("@Id_Medida", objeto.RefMedida.Id_Medida);
                 cmd.Parameters.AddWithValue("@Activo", objeto.Activo);
                 cmd.Parameters.Add("@MsjError", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -79,7 +79,7 @@ namespace PoS_Repository.Implementation
             using (var con = _connection.GetSQLConnection())
             {
                 con.Open();
-                var cmd = new SqlCommand("sp_listaCategorias", con);
+                var cmd = new SqlCommand("sp_listaCategoria", con);
                 cmd.Parameters.AddWithValue("@Buscar", buscar);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -89,12 +89,12 @@ namespace PoS_Repository.Implementation
                     {
                         list.Add(new Categorias
                         {
-                            Id_Categorias = Convert.ToInt32(dr["Id_Categorias"]),
+                            Id_Categoria = Convert.ToInt32(dr["Id_Categoria"]),
                             Nombre = dr["Nombre"].ToString()!.Trim(),
                             Activo = Convert.ToInt32(dr["Activo"]),
                             RefMedida = new Medidas
                             {
-                                Id_Medidas = Convert.ToInt32(dr["Id_Medidas"]),
+                                Id_Medida = Convert.ToInt32(dr["Id_Medida"]),
                                 Nombre = dr["NombreMedida"].ToString()!.Trim(),
                             }
                         });
