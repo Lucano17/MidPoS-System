@@ -34,10 +34,7 @@ namespace PoS_Presentation.Forms
             }
         }
 
-        private void VolverEditarButton_Click(object sender, EventArgs e)
-        {
 
-        }
         private async Task MostrarCategorias(string buscar = "")
         {
             var listaCategorias = await _categoriaService.Lista(buscar);
@@ -105,5 +102,17 @@ namespace PoS_Presentation.Forms
 
 
         }
+
+        private void VolverNuevoButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+        }
+
+        private void VolverEditarButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+        }
+
+
     }
 }

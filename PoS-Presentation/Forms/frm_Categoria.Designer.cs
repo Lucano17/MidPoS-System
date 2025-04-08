@@ -164,6 +164,7 @@
             VolverNuevoButton.TabIndex = 4;
             VolverNuevoButton.Text = "Volver";
             VolverNuevoButton.UseVisualStyleBackColor = true;
+            VolverNuevoButton.Click += VolverNuevoButton_Click;
             // 
             // MedidaNuevoCmbBox
             // 
