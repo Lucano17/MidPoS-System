@@ -1,8 +1,10 @@
 ﻿using PoS_Presentation.Utilities;
 using PoS_Presentation.Utilities.Objetos;
 using PoS_Presentation.ViewModels;
+using PoS_Repository.Entities;
 using PoS_Service.Interfaces;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace PoS_Presentation.Forms
 {
@@ -74,7 +76,7 @@ namespace PoS_Presentation.Forms
             var items = listaMedida.Select(item => new OpcionCmbBox
             {
                 Texto = item.Nombre,
-                Valor = item.Valor
+                Valor = item.Id_Medida
             }).ToArray();
             HabilitadoCmbBox.InsertarItems(itemsHabilitado);
             MedidaNuevoCmbBox.InsertarItems(items);
@@ -83,7 +85,25 @@ namespace PoS_Presentation.Forms
 
         private void CategoriasDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (CategoriasDGV.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var categoriaSeleccionada = (CategoriaViewModel)CategoriasDGV.CurrentRow.DataBoundItem;
+                NombreEditarTextBox.Text = categoriaSeleccionada.NombreCategoria.ToString();
 
+                foreach (OpcionCmbBox opcion in MedidaEditarCmbBox.Items)
+                {
+
+                    if (opcion.Valor == categoriaSeleccionada.IdMedida)
+                    {
+                        MedidaEditarCmbBox.SelectedItem = opcion;
+                        break;
+                    }
+                }
+
+                MostrarTab(TabEditar.Name);
+                NombreEditarTextBox.Select();
+
+            }
         }
 
         private async void BuscarButton_Click(object sender, EventArgs e)
@@ -93,9 +113,9 @@ namespace PoS_Presentation.Forms
 
         private void NuevoListaButton_Click(object sender, EventArgs e)
         {
-            NombreNuevoLabel.Text = "";
+            NombreNuevoTextBox.Text = "";
             MedidaNuevoCmbBox.SelectedIndex = 0;
-            NombreNuevoLabel.Select();
+            NombreNuevoTextBox.Select();
             //tabControlMain.SelectedTab = tabControlMain.TabPages[TabNuevo.Name];
 
             MostrarTab(TabNuevo.Name);
@@ -108,11 +128,49 @@ namespace PoS_Presentation.Forms
             MostrarTab(TabLista.Name);
         }
 
+        private async void GuardarNuevoButton_Click(object sender, EventArgs e)
+        {
+            if (NombreNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre");
+                return;
+            }
+
+            if (MedidaNuevoCmbBox.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una medida");
+                return;
+            }
+
+            var medida = ((OpcionCmbBox)MedidaNuevoCmbBox.SelectedItem!).Valor;
+            var objeto = new Categorias
+            {
+                Nombre = NombreNuevoTextBox.Text.Trim(),
+                RefMedida = new Medidas { Id_Medida = medida }
+            };
+
+            var respuesta = await _categoriaService.Crear(objeto);
+
+            if (!string.IsNullOrEmpty(respuesta))
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                MessageBox.Show("Elemento guardado correctamente" + respuesta);
+                await MostrarCategorias();
+                MostrarTab(TabLista.Name);
+            }
+        }
+
         private void VolverEditarButton_Click(object sender, EventArgs e)
         {
             MostrarTab(TabLista.Name);
         }
 
+        private void NombreNuevoTextBox_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

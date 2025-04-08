@@ -39,7 +39,7 @@
             VolverNuevoButton = new Button();
             MedidaNuevoCmbBox = new ComboBox();
             label3 = new Label();
-            NombreNuevoLabel = new TextBox();
+            NombreNuevoTextBox = new TextBox();
             label2 = new Label();
             TabEditar = new TabPage();
             HabilitadoCmbBox = new ComboBox();
@@ -132,7 +132,7 @@
             TabNuevo.Controls.Add(VolverNuevoButton);
             TabNuevo.Controls.Add(MedidaNuevoCmbBox);
             TabNuevo.Controls.Add(label3);
-            TabNuevo.Controls.Add(NombreNuevoLabel);
+            TabNuevo.Controls.Add(NombreNuevoTextBox);
             TabNuevo.Controls.Add(label2);
             TabNuevo.Location = new Point(4, 24);
             TabNuevo.Name = "TabNuevo";
@@ -153,6 +153,7 @@
             GuardarNuevoButton.TabIndex = 5;
             GuardarNuevoButton.Text = "Guardar";
             GuardarNuevoButton.UseVisualStyleBackColor = true;
+            GuardarNuevoButton.Click += GuardarNuevoButton_Click;
             // 
             // VolverNuevoButton
             // 
@@ -185,12 +186,13 @@
             label3.TabIndex = 2;
             label3.Text = "Medida:";
             // 
-            // NombreNuevoLabel
+            // NombreNuevoTextBox
             // 
-            NombreNuevoLabel.Location = new Point(241, 72);
-            NombreNuevoLabel.Name = "NombreNuevoLabel";
-            NombreNuevoLabel.Size = new Size(270, 27);
-            NombreNuevoLabel.TabIndex = 1;
+            NombreNuevoTextBox.Location = new Point(241, 72);
+            NombreNuevoTextBox.Name = "NombreNuevoTextBox";
+            NombreNuevoTextBox.Size = new Size(270, 27);
+            NombreNuevoTextBox.TabIndex = 1;
+            NombreNuevoTextBox.TextChanged += NombreNuevoTextBox_TextChanged;
             // 
             // label2
             // 
@@ -341,7 +343,7 @@
         private TextBox BuscarTextBox;
         private Button NuevoListaButton;
         private DataGridView CategoriasDGV;
-        private TextBox NombreNuevoLabel;
+        private TextBox NombreNuevoTextBox;
         private Label label2;
         private Label label3;
         private Button GuardarNuevoButton;
