@@ -1,17 +1,8 @@
 ﻿using PoS_Presentation.Utilities;
 using PoS_Presentation.Utilities.Objetos;
 using PoS_Presentation.ViewModels;
-using PoS_Repository.Entities;
 using PoS_Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PoS_Presentation.Forms
 {
@@ -24,6 +15,23 @@ namespace PoS_Presentation.Forms
             InitializeComponent();
             _categoriaService = categoriaService;
             _medidaService = medidaService;
+        }
+
+        public void MostrarTab(string tabName)
+        {
+            var TabsMenu = new TabPage[] { TabLista, TabNuevo, TabEditar };
+
+            foreach (var tab in TabsMenu)
+            {
+                if (tab.Name != tabName)
+                {
+                    tab.Parent = null;
+                }
+                else
+                {
+                    tab.Parent = tabControlMain;
+                }
+            }
         }
 
         private void VolverEditarButton_Click(object sender, EventArgs e)
@@ -52,6 +60,7 @@ namespace PoS_Presentation.Forms
         }
         private async void frm_Categoria_Load(object sender, EventArgs e)
         {
+            MostrarTab(TabLista.Name);
             CategoriasDGV.ImplementarConfiguracion("Editar");
             await MostrarCategorias();
 
@@ -77,6 +86,23 @@ namespace PoS_Presentation.Forms
 
         private void CategoriasDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private async void BuscarButton_Click(object sender, EventArgs e)
+        {
+            await MostrarCategorias(BuscarTextBox.Text);
+        }
+
+        private void NuevoListaButton_Click(object sender, EventArgs e)
+        {
+            NombreNuevoLabel.Text = "";
+            MedidaNuevoCmbBox.SelectedIndex = 0;
+            NombreNuevoLabel.Select();
+            //tabControlMain.SelectedTab = tabControlMain.TabPages[TabNuevo.Name];
+
+            MostrarTab(TabNuevo.Name);
+
 
         }
     }

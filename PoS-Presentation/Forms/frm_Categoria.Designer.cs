@@ -33,7 +33,7 @@
             CategoriasDGV = new DataGridView();
             BuscarButton = new Button();
             BuscarTextBox = new TextBox();
-            NuevoButton = new Button();
+            NuevoListaButton = new Button();
             TabNuevo = new TabPage();
             GuardarNuevoButton = new Button();
             VolverNuevoButton = new Button();
@@ -76,7 +76,7 @@
             TabLista.Controls.Add(CategoriasDGV);
             TabLista.Controls.Add(BuscarButton);
             TabLista.Controls.Add(BuscarTextBox);
-            TabLista.Controls.Add(NuevoButton);
+            TabLista.Controls.Add(NuevoListaButton);
             TabLista.Location = new Point(4, 24);
             TabLista.Name = "TabLista";
             TabLista.Padding = new Padding(3);
@@ -105,6 +105,7 @@
             BuscarButton.TabIndex = 2;
             BuscarButton.Text = "Buscar";
             BuscarButton.UseVisualStyleBackColor = true;
+            BuscarButton.Click += BuscarButton_Click;
             // 
             // BuscarTextBox
             // 
@@ -113,16 +114,17 @@
             BuscarTextBox.Size = new Size(175, 27);
             BuscarTextBox.TabIndex = 1;
             // 
-            // NuevoButton
+            // NuevoListaButton
             // 
-            NuevoButton.Cursor = Cursors.Hand;
-            NuevoButton.FlatStyle = FlatStyle.Flat;
-            NuevoButton.Location = new Point(20, 10);
-            NuevoButton.Name = "NuevoButton";
-            NuevoButton.Size = new Size(94, 27);
-            NuevoButton.TabIndex = 0;
-            NuevoButton.Text = "Nuevo";
-            NuevoButton.UseVisualStyleBackColor = true;
+            NuevoListaButton.Cursor = Cursors.Hand;
+            NuevoListaButton.FlatStyle = FlatStyle.Flat;
+            NuevoListaButton.Location = new Point(20, 10);
+            NuevoListaButton.Name = "NuevoListaButton";
+            NuevoListaButton.Size = new Size(94, 27);
+            NuevoListaButton.TabIndex = 0;
+            NuevoListaButton.Text = "Nuevo";
+            NuevoListaButton.UseVisualStyleBackColor = true;
+            NuevoListaButton.Click += NuevoListaButton_Click;
             // 
             // TabNuevo
             // 
@@ -336,7 +338,7 @@
         private TabPage TabEditar;
         private Button BuscarButton;
         private TextBox BuscarTextBox;
-        private Button NuevoButton;
+        private Button NuevoListaButton;
         private DataGridView CategoriasDGV;
         private TextBox NombreNuevoLabel;
         private Label label2;
