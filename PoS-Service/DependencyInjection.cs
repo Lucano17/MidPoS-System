@@ -12,6 +12,7 @@ namespace PoS_Service
             services.AddSingleton<Connection>();
             services.AddTransient<IMedidaService, MedidaService>();
             services.AddTransient<ICategoriaService, CategoriaService>();
+            services.AddTransient<IProductoService, ProductoService>();
         }
     }
 }
