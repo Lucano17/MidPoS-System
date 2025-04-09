@@ -90,15 +90,8 @@ namespace PoS_Presentation.Forms
                 var categoriaSeleccionada = (CategoriaViewModel)CategoriasDGV.CurrentRow.DataBoundItem;
                 NombreEditarTextBox.Text = categoriaSeleccionada.NombreCategoria.ToString();
 
-                foreach (OpcionCmbBox opcion in MedidaEditarCmbBox.Items)
-                {
-
-                    if (opcion.Valor == categoriaSeleccionada.IdMedida)
-                    {
-                        MedidaEditarCmbBox.SelectedItem = opcion;
-                        break;
-                    }
-                }
+                MedidaEditarCmbBox.EstablecerValor(categoriaSeleccionada.IdMedida);
+                HabilitadoCmbBox.EstablecerValor(categoriaSeleccionada.Activo);
 
                 MostrarTab(TabEditar.Name);
                 NombreEditarTextBox.Select();
@@ -157,20 +150,68 @@ namespace PoS_Presentation.Forms
             }
             else
             {
-                MessageBox.Show("Elemento guardado correctamente" + respuesta);
+                MessageBox.Show("Elemento creado correctamente");
                 await MostrarCategorias();
                 MostrarTab(TabLista.Name);
             }
         }
-
         private void VolverEditarButton_Click(object sender, EventArgs e)
         {
             MostrarTab(TabLista.Name);
         }
 
+
         private void NombreNuevoTextBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void HabilitadoCmbBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void GuardarEditarButton_Click(object sender, EventArgs e)
+        {
+            if (NombreEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre");
+                return;
+            }
+
+            if (MedidaEditarCmbBox.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una medida");
+                return;
+            }
+            var categoriaSeleccionada = (CategoriaViewModel)CategoriasDGV.CurrentRow.DataBoundItem;
+            if (categoriaSeleccionada.IdCategoria == 0)
+            {
+                MessageBox.Show("Error: no se está obteniendo el Id de la categoría.");
+                return;
+            }
+            var medida = ((OpcionCmbBox)MedidaEditarCmbBox.SelectedItem!).Valor;
+            var habilitado = ((OpcionCmbBox)HabilitadoCmbBox.SelectedItem!).Valor;
+            var objeto = new Categorias
+            {
+                Id_Categoria = categoriaSeleccionada.IdCategoria,
+                Nombre = NombreEditarTextBox.Text.Trim(),
+                RefMedida = new Medidas { Id_Medida = medida },
+                Activo = habilitado
+            };
+
+            var respuesta = await _categoriaService.Editar(objeto);
+
+            if (respuesta != "")
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                MessageBox.Show("Elemento editado correctamente");
+                await MostrarCategorias();
+                MostrarTab(TabLista.Name);
+            }
         }
     }
 }

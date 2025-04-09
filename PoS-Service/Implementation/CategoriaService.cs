@@ -1,11 +1,6 @@
 ﻿using PoS_Repository.Entities;
 using PoS_Repository.Interfaces;
 using PoS_Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoS_Service.Implementation
 {

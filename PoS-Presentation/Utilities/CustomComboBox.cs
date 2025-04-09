@@ -16,5 +16,18 @@ namespace PoS_Presentation.Utilities
             combo.ValueMember = "Valor";
             combo.SelectedIndex = 0;
         }
+
+        public static void EstablecerValor(this ComboBox combo, int valor)
+        {
+            foreach (OpcionCmbBox opcion in combo.Items)
+            {
+
+                if (opcion.Valor == valor)
+                {
+                    combo.SelectedItem = opcion;
+                    break;
+                }
+            }
+        }
     }
 }

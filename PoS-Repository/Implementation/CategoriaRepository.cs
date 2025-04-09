@@ -81,7 +81,7 @@ namespace PoS_Repository.Implementation
                 con.Open();
                 var cmd = new SqlCommand("sp_listaCategoria", con);
                 cmd.Parameters.AddWithValue("@Buscar", buscar);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var dr = await cmd.ExecuteReaderAsync())
                 {

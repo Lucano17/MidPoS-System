@@ -230,6 +230,7 @@
             HabilitadoCmbBox.Name = "HabilitadoCmbBox";
             HabilitadoCmbBox.Size = new Size(270, 28);
             HabilitadoCmbBox.TabIndex = 13;
+            HabilitadoCmbBox.SelectedIndexChanged += HabilitadoCmbBox_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -251,6 +252,7 @@
             GuardarEditarButton.TabIndex = 11;
             GuardarEditarButton.Text = "Guardar";
             GuardarEditarButton.UseVisualStyleBackColor = true;
+            GuardarEditarButton.Click += GuardarEditarButton_Click;
             // 
             // VolverEditarButton
             // 
