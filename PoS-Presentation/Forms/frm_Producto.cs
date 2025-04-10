@@ -1,0 +1,96 @@
+﻿using PoS_Presentation.Utilities;
+using PoS_Presentation.Utilities.Objetos;
+using PoS_Presentation.ViewModels;
+using PoS_Service.Interfaces;
+
+namespace PoS_Presentation.Forms
+{
+    public partial class frm_Producto : Form
+    {
+        private readonly IProductoService _productoService;
+        private readonly ICategoriaService _categoriaService;
+        public frm_Producto(ICategoriaService categoriaService, IProductoService productoService)
+        {
+            InitializeComponent();
+            _categoriaService = categoriaService;
+            _productoService = productoService;
+        }
+
+        public void MostrarTab(string tabName)
+        {
+            var TabsMenu = new TabPage[] { TabLista, TabNuevo, TabEditar };
+
+            foreach (var tab in TabsMenu)
+            {
+                if (tab.Name != tabName)
+                {
+                    tab.Parent = null;
+                }
+                else
+                {
+                    tab.Parent = tabControlMain;
+                }
+            }
+        }
+
+        private async Task MostrarProductos(string buscar = "")
+        {
+            var listaProductos = await _productoService.Lista(buscar);
+            var listaViewModel = listaProductos.Select(item => new ProductoViewModel
+            {
+                IdProducto = item.Id_Producto,
+                Codigo = item.Codigo,
+                Nombre = item.Nombre,
+                Descripcion = item.Descripcion,
+                IdCategoria = item.RefCategoria.Id_Categoria,
+                Categoria = item.RefCategoria.Nombre,
+                PrecioCompra = decimal.Parse(item.PrecioCompra.ToString("0.00")),
+                PrecioVenta = decimal.Parse(item.PrecioVenta.ToString("0.00")),
+                Stock = item.Stock,
+                Activo = item.Activo,
+                Habilitado = item.Activo == 1 ? "SI" : "NO"
+            }).ToList();
+            ProductosDGV.DataSource = listaViewModel;
+
+            ProductosDGV.Columns["Stock"].HeaderText = "Cantidad";
+            ProductosDGV.Columns["PrecioCompra"].HeaderText = "P. Compra";
+            ProductosDGV.Columns["PrecioVenta"].HeaderText = "P. Venta";
+
+            ProductosDGV.Columns["IdProducto"].Visible = false;
+            ProductosDGV.Columns["Activo"].Visible = false;
+            ProductosDGV.Columns["IdCategoria"].Visible = false;
+
+            ProductosDGV.Columns["Descripcion"].Width = 200;
+        }
+
+        private async void frm_Producto_Load(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+            ProductosDGV.ImplementarConfiguracion("Editar");
+            await MostrarProductos();
+
+            //ProductosDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            OpcionCmbBox[] itemsHabilitado = new OpcionCmbBox[]
+            {
+                new OpcionCmbBox {Texto = "Si", Valor = 1},
+                new OpcionCmbBox {Texto = "No", Valor = 0}
+            };
+
+
+            var listaCategoria = await _categoriaService.Lista();
+            var items = listaCategoria
+                .Where(item => item.Activo == 1)
+                .Select(item => new OpcionCmbBox
+                {
+                    Texto = item.Nombre,
+                    Valor = item.Id_Categoria
+                })
+                .ToArray();
+
+            HabilitadoCmbBox.InsertarItems(itemsHabilitado);
+            CategoriaNuevoCmbBox.InsertarItems(items);
+            CategoriaEditarCmbBox.InsertarItems(items);
+        }
+    }
+}

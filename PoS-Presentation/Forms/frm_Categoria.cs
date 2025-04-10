@@ -4,7 +4,6 @@ using PoS_Presentation.ViewModels;
 using PoS_Repository.Entities;
 using PoS_Service.Interfaces;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace PoS_Presentation.Forms
 {
