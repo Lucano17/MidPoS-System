@@ -224,5 +224,91 @@ namespace PoS_Presentation.Forms
 
             }
         }
+
+        private void VolverEditarButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+        }
+
+        private async void GuardarEditarButton_Click(object sender, EventArgs e)
+        {
+            if (CodigoEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un código");
+                return;
+            }
+
+            if (NombreEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre para el producto");
+                return;
+            }
+
+            if (PrecioCompraEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un precio de compra para el producto");
+                return;
+            }
+
+            if (PrecioVentaEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un precio de venta para el producto");
+                return;
+            }
+
+            if (CantidadEditarUpDown.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar la cantidad de existencias del producto");
+                return;
+            }
+
+            decimal precioCompra = 0;
+            decimal precioVenta = 0;
+
+            if (!decimal.TryParse(PrecioCompraEditarTextBox.Text, out precioCompra))
+            {
+                MessageBox.Show("Precio de compra - Formato de moneda incorrecto", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PrecioCompraEditarTextBox.Select();
+                return;
+            }
+
+            if (!decimal.TryParse(PrecioVentaEditarTextBox.Text, out precioVenta))
+            {
+                MessageBox.Show("Precio de venta - Formato de moneda incorrecto", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PrecioVentaEditarTextBox.Select();
+                return;
+            }
+
+            var productoSeleccionado = (ProductoViewModel)ProductosDGV.CurrentRow.DataBoundItem;
+            var objeto = new Productos
+            {
+                Id_Producto = productoSeleccionado.IdProducto,
+                RefCategoria = new Categorias
+                {
+                    Id_Categoria = ((OpcionCmbBox)CategoriaEditarCmbBox.SelectedItem!).Valor,
+                },
+                Codigo = CodigoEditarTextBox.Text.Trim(),
+                Nombre = NombreEditarTextBox.Text.Trim(),
+                Descripcion = DescripcionEditarTextBox.Text.Trim(),
+                PrecioCompra = precioCompra,
+                PrecioVenta = precioVenta,
+                Stock = Convert.ToInt32(CantidadEditarUpDown.Value),
+                Activo = ((OpcionCmbBox)HabilitadoCmbBox.SelectedItem!).Valor,
+            };
+
+            var respuesta = await _productoService.Editar(objeto);
+
+            if (respuesta != "")
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                await MostrarProductos();
+                MostrarTab(TabLista.Name);
+            }
+        }
     }
 }

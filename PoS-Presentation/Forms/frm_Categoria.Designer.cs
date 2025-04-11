@@ -1,4 +1,5 @@
-﻿namespace PoS_Presentation.Forms
+﻿
+namespace PoS_Presentation.Forms
 {
     partial class frm_Categoria
     {
@@ -332,6 +333,16 @@
             TabEditar.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void HabilitadoCmbBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void NombreNuevoTextBox_TextChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

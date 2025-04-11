@@ -159,17 +159,6 @@ namespace PoS_Presentation.Forms
             MostrarTab(TabLista.Name);
         }
 
-
-        private void NombreNuevoTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HabilitadoCmbBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private async void GuardarEditarButton_Click(object sender, EventArgs e)
         {
             if (NombreEditarTextBox.Text.Trim() == "")

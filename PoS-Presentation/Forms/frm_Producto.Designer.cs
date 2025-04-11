@@ -274,6 +274,7 @@
             GuardarEditarButton.TabIndex = 22;
             GuardarEditarButton.Text = "Guardar";
             GuardarEditarButton.UseVisualStyleBackColor = false;
+            GuardarEditarButton.Click += GuardarEditarButton_Click;
             // 
             // VolverEditarButton
             // 
@@ -286,6 +287,7 @@
             VolverEditarButton.TabIndex = 21;
             VolverEditarButton.Text = "Volver";
             VolverEditarButton.UseVisualStyleBackColor = false;
+            VolverEditarButton.Click += VolverEditarButton_Click;
             // 
             // CodigoEditarTextBox
             // 
