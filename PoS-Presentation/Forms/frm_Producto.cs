@@ -1,6 +1,7 @@
 ﻿using PoS_Presentation.Utilities;
 using PoS_Presentation.Utilities.Objetos;
 using PoS_Presentation.ViewModels;
+using PoS_Repository.Entities;
 using PoS_Service.Interfaces;
 using System.Threading.Tasks;
 
@@ -125,7 +126,7 @@ namespace PoS_Presentation.Forms
             MostrarTab(TabLista.Name);
         }
 
-        private void GuardarNuevoButton_Click(object sender, EventArgs e)
+        private async void GuardarNuevoButton_Click(object sender, EventArgs e)
         {
             if (CodigoNuevoTextBox.Text.Trim() == "")
             {
@@ -176,6 +177,31 @@ namespace PoS_Presentation.Forms
                 return;
             }
 
+            var objeto = new Productos
+            {
+                RefCategoria = new Categorias
+                {
+                    Id_Categoria = ((OpcionCmbBox)CategoriaNuevoCmbBox.SelectedItem!).Valor,
+                },
+                Codigo = CodigoNuevoTextBox.Text.Trim(),
+                Nombre = NombreNuevoTextBox.Text.Trim(),
+                Descripcion = DescripcionNuevoTextBox.Text.Trim(),
+                PrecioCompra = precioCompra,
+                PrecioVenta = precioVenta,
+                Stock = Convert.ToInt32(CantidadNuevoUpDown.Value)
+            };
+
+            var respuesta = await _productoService.Crear(objeto);
+
+            if (respuesta != "")
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                await MostrarProductos();
+                MostrarTab(TabLista.Name);
+            }
         }
     }
 }
