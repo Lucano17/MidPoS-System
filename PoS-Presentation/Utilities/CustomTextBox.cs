@@ -14,6 +14,8 @@ namespace PoS_Presentation.Utilities
                 }
                 else
                 {
+                    // TODO: Controlar que solamente se pueda poner un solo '.'
+                    // y también que la ',' se tome como un punto.
                     if (char.IsControl(e.KeyChar) || e.KeyChar.ToString() == ".")
                     {
                         e.Handled = false;

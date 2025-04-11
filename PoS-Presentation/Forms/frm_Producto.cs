@@ -124,5 +124,58 @@ namespace PoS_Presentation.Forms
         {
             MostrarTab(TabLista.Name);
         }
+
+        private void GuardarNuevoButton_Click(object sender, EventArgs e)
+        {
+            if (CodigoNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un código");
+                return;
+            }
+
+            if (NombreNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre para el producto");
+                return;
+            }
+
+            if (PrecioCompraNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un precio de compra para el producto");
+                return;
+            }
+
+            if (PrecioVentaNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un precio de venta para el producto");
+                return;
+            }
+
+            if (CantidadNuevoUpDown.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar la cantidad de existencias del producto");
+                return;
+            }
+
+            decimal precioCompra = 0;
+            decimal precioVenta = 0;
+
+            if (!decimal.TryParse(PrecioCompraNuevoTextBox.Text, out precioCompra))
+            {
+                MessageBox.Show("Precio de compra - Formato de moneda incorrecto", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PrecioCompraNuevoTextBox.Select();
+                return;
+            }
+
+            if (!decimal.TryParse(PrecioVentaNuevoTextBox.Text, out precioVenta))
+            {
+                MessageBox.Show("Precio de venta - Formato de moneda incorrecto", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                PrecioVentaNuevoTextBox.Select();
+                return;
+            }
+
+        }
     }
 }
