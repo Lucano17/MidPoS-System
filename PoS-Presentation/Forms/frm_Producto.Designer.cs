@@ -32,11 +32,12 @@
             GuardarNuevoButton = new Button();
             VolverNuevoButton = new Button();
             TabEditar = new TabPage();
+            HabilitadoCmbBox = new ComboBox();
             label16 = new Label();
             DescripcionEditarTextBox = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            CantidadUpDown = new NumericUpDown();
+            CantidadEditarUpDown = new NumericUpDown();
             PrecioCompraEditarTextBox = new TextBox();
             label6 = new Label();
             PrecioVentaEditarTextBox = new TextBox();
@@ -45,8 +46,8 @@
             label13 = new Label();
             NombreEditarTextBox = new TextBox();
             label14 = new Label();
-            button1 = new Button();
-            button2 = new Button();
+            GuardarEditarButton = new Button();
+            VolverEditarButton = new Button();
             CodigoEditarTextBox = new TextBox();
             label15 = new Label();
             CodigoNuevoTextBox = new TextBox();
@@ -70,9 +71,8 @@
             NuevoListaButton = new Button();
             TabLista = new TabPage();
             tabControlMain = new TabControl();
-            HabilitadoCmbBox = new ComboBox();
             TabEditar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)CantidadUpDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CantidadEditarUpDown).BeginInit();
             TabNuevo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)CantidadNuevoUpDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ProductosDGV).BeginInit();
@@ -113,6 +113,7 @@
             VolverNuevoButton.TabIndex = 4;
             VolverNuevoButton.Text = "Volver";
             VolverNuevoButton.UseVisualStyleBackColor = false;
+            VolverNuevoButton.Click += VolverNuevoButton_Click;
             // 
             // TabEditar
             // 
@@ -121,7 +122,7 @@
             TabEditar.Controls.Add(DescripcionEditarTextBox);
             TabEditar.Controls.Add(label4);
             TabEditar.Controls.Add(label5);
-            TabEditar.Controls.Add(CantidadUpDown);
+            TabEditar.Controls.Add(CantidadEditarUpDown);
             TabEditar.Controls.Add(PrecioCompraEditarTextBox);
             TabEditar.Controls.Add(label6);
             TabEditar.Controls.Add(PrecioVentaEditarTextBox);
@@ -130,8 +131,8 @@
             TabEditar.Controls.Add(label13);
             TabEditar.Controls.Add(NombreEditarTextBox);
             TabEditar.Controls.Add(label14);
-            TabEditar.Controls.Add(button1);
-            TabEditar.Controls.Add(button2);
+            TabEditar.Controls.Add(GuardarEditarButton);
+            TabEditar.Controls.Add(VolverEditarButton);
             TabEditar.Controls.Add(CodigoEditarTextBox);
             TabEditar.Controls.Add(label15);
             TabEditar.Location = new Point(4, 24);
@@ -141,6 +142,16 @@
             TabEditar.TabIndex = 2;
             TabEditar.Text = "Editar";
             TabEditar.UseVisualStyleBackColor = true;
+            // 
+            // HabilitadoCmbBox
+            // 
+            HabilitadoCmbBox.Cursor = Cursors.Hand;
+            HabilitadoCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            HabilitadoCmbBox.FormattingEnabled = true;
+            HabilitadoCmbBox.Location = new Point(407, 225);
+            HabilitadoCmbBox.Name = "HabilitadoCmbBox";
+            HabilitadoCmbBox.Size = new Size(270, 28);
+            HabilitadoCmbBox.TabIndex = 36;
             // 
             // label16
             // 
@@ -177,12 +188,12 @@
             label5.TabIndex = 32;
             label5.Text = "Cantidad:";
             // 
-            // CantidadUpDown
+            // CantidadEditarUpDown
             // 
-            CantidadUpDown.Location = new Point(407, 44);
-            CantidadUpDown.Name = "CantidadUpDown";
-            CantidadUpDown.Size = new Size(270, 27);
-            CantidadUpDown.TabIndex = 31;
+            CantidadEditarUpDown.Location = new Point(407, 44);
+            CantidadEditarUpDown.Name = "CantidadEditarUpDown";
+            CantidadEditarUpDown.Size = new Size(270, 27);
+            CantidadEditarUpDown.TabIndex = 31;
             // 
             // PrecioCompraEditarTextBox
             // 
@@ -250,30 +261,31 @@
             label14.TabIndex = 23;
             label14.Text = "Nombre:";
             // 
-            // button1
+            // GuardarEditarButton
             // 
-            button1.BackColor = Color.White;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.FromArgb(30, 90, 195);
-            button1.Location = new Point(407, 268);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 27);
-            button1.TabIndex = 22;
-            button1.Text = "Guardar";
-            button1.UseVisualStyleBackColor = false;
+            GuardarEditarButton.BackColor = Color.White;
+            GuardarEditarButton.Cursor = Cursors.Hand;
+            GuardarEditarButton.FlatStyle = FlatStyle.Flat;
+            GuardarEditarButton.ForeColor = Color.FromArgb(30, 90, 195);
+            GuardarEditarButton.Location = new Point(407, 268);
+            GuardarEditarButton.Name = "GuardarEditarButton";
+            GuardarEditarButton.Size = new Size(94, 27);
+            GuardarEditarButton.TabIndex = 22;
+            GuardarEditarButton.Text = "Guardar";
+            GuardarEditarButton.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // VolverEditarButton
             // 
-            button2.BackColor = Color.White;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(231, 268);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 27);
-            button2.TabIndex = 21;
-            button2.Text = "Volver";
-            button2.UseVisualStyleBackColor = false;
+            VolverEditarButton.BackColor = Color.White;
+            VolverEditarButton.Cursor = Cursors.Hand;
+            VolverEditarButton.FlatStyle = FlatStyle.Flat;
+            VolverEditarButton.Location = new Point(231, 268);
+            VolverEditarButton.Name = "VolverEditarButton";
+            VolverEditarButton.Size = new Size(94, 27);
+            VolverEditarButton.TabIndex = 21;
+            VolverEditarButton.Text = "Volver";
+            VolverEditarButton.UseVisualStyleBackColor = false;
+            //VolverEditarButton.Click += VolverEditarButton_Click;
             // 
             // CodigoEditarTextBox
             // 
@@ -452,6 +464,7 @@
             BuscarButton.TabIndex = 2;
             BuscarButton.Text = "Buscar";
             BuscarButton.UseVisualStyleBackColor = false;
+            BuscarButton.Click += BuscarButton_Click;
             // 
             // BuscarTextBox
             // 
@@ -471,6 +484,7 @@
             NuevoListaButton.TabIndex = 0;
             NuevoListaButton.Text = "Nuevo";
             NuevoListaButton.UseVisualStyleBackColor = false;
+            NuevoListaButton.Click += NuevoListaButton_Click;
             // 
             // TabLista
             // 
@@ -499,16 +513,6 @@
             tabControlMain.SizeMode = TabSizeMode.Fixed;
             tabControlMain.TabIndex = 2;
             // 
-            // HabilitadoCmbBox
-            // 
-            HabilitadoCmbBox.Cursor = Cursors.Hand;
-            HabilitadoCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            HabilitadoCmbBox.FormattingEnabled = true;
-            HabilitadoCmbBox.Location = new Point(407, 225);
-            HabilitadoCmbBox.Name = "HabilitadoCmbBox";
-            HabilitadoCmbBox.Size = new Size(270, 28);
-            HabilitadoCmbBox.TabIndex = 36;
-            // 
             // frm_Producto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -523,7 +527,7 @@
             Load += frm_Producto_Load;
             TabEditar.ResumeLayout(false);
             TabEditar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)CantidadUpDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CantidadEditarUpDown).EndInit();
             TabNuevo.ResumeLayout(false);
             TabNuevo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)CantidadNuevoUpDown).EndInit();
@@ -566,7 +570,7 @@
         private TextBox DescripcionEditarTextBox;
         private Label label4;
         private Label label5;
-        private NumericUpDown CantidadUpDown;
+        private NumericUpDown CantidadEditarUpDown;
         private TextBox PrecioCompraEditarTextBox;
         private Label label6;
         private TextBox PrecioVentaEditarTextBox;
@@ -575,8 +579,8 @@
         private Label label13;
         private TextBox NombreEditarTextBox;
         private Label label14;
-        private Button button1;
-        private Button button2;
+        private Button GuardarEditarButton;
+        private Button VolverEditarButton;
         private TextBox CodigoEditarTextBox;
         private Label label15;
         private ComboBox HabilitadoCmbBox;

@@ -2,6 +2,7 @@
 using PoS_Presentation.Utilities.Objetos;
 using PoS_Presentation.ViewModels;
 using PoS_Service.Interfaces;
+using System.Threading.Tasks;
 
 namespace PoS_Presentation.Forms
 {
@@ -67,6 +68,13 @@ namespace PoS_Presentation.Forms
         {
             MostrarTab(TabLista.Name);
             ProductosDGV.ImplementarConfiguracion("Editar");
+
+            PrecioCompraNuevoTextBox.ValidarNumero();
+            PrecioVentaNuevoTextBox.ValidarNumero();
+
+            PrecioCompraEditarTextBox.ValidarNumero();
+            PrecioVentaEditarTextBox.ValidarNumero();
+
             await MostrarProductos();
 
             //ProductosDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -91,6 +99,30 @@ namespace PoS_Presentation.Forms
             HabilitadoCmbBox.InsertarItems(itemsHabilitado);
             CategoriaNuevoCmbBox.InsertarItems(items);
             CategoriaEditarCmbBox.InsertarItems(items);
+        }
+
+        private async void BuscarButton_Click(object sender, EventArgs e)
+        {
+            await MostrarProductos(BuscarTextBox.Text);
+        }
+
+        private void NuevoListaButton_Click(object sender, EventArgs e)
+        {
+            CategoriaNuevoCmbBox.SelectedIndex = 0;
+            NombreNuevoTextBox.Select();
+            NombreNuevoTextBox.Text = "";
+            CodigoNuevoTextBox.Text = "";
+            DescripcionNuevoTextBox.Text = "";
+            CantidadNuevoUpDown.Value = 0;
+            PrecioVentaNuevoTextBox.Text = "";
+            PrecioCompraNuevoTextBox.Text = "";
+
+            MostrarTab(TabNuevo.Name);
+        }
+
+        private void VolverNuevoButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
         }
     }
 }
