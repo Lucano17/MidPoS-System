@@ -203,5 +203,26 @@ namespace PoS_Presentation.Forms
                 MostrarTab(TabLista.Name);
             }
         }
+
+        private void ProductosDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ProductosDGV.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var productoSeleccionado = (ProductoViewModel)ProductosDGV.CurrentRow.DataBoundItem;
+
+                CategoriaEditarCmbBox.EstablecerValor(productoSeleccionado.IdCategoria);
+                CodigoEditarTextBox.Text = productoSeleccionado.Codigo.ToString();
+                NombreEditarTextBox.Text = productoSeleccionado.Nombre.ToString();
+                DescripcionEditarTextBox.Text = productoSeleccionado.Descripcion.ToString();
+                PrecioCompraEditarTextBox.Text = productoSeleccionado.PrecioCompra.ToString();
+                PrecioVentaEditarTextBox.Text = productoSeleccionado.PrecioVenta.ToString();
+                CantidadEditarUpDown.Value = productoSeleccionado.Stock;
+                HabilitadoCmbBox.EstablecerValor(productoSeleccionado.Activo);
+
+                MostrarTab(TabEditar.Name);
+                NombreEditarTextBox.Select();
+
+            }
+        }
     }
 }

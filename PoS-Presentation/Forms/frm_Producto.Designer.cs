@@ -452,6 +452,7 @@
             ProductosDGV.RowHeadersWidth = 51;
             ProductosDGV.Size = new Size(691, 257);
             ProductosDGV.TabIndex = 3;
+            ProductosDGV.CellContentClick += ProductosDGV_CellContentClick;
             // 
             // BuscarButton
             // 
