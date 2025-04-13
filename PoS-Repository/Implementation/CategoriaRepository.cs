@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
 using PoS_Repository.DB;
 using PoS_Repository.Entities;
@@ -75,7 +73,7 @@ namespace PoS_Repository.Implementation
 
         public async Task<List<Categorias>> Lista(string buscar = "")
         {
-            List<Categorias> list = new List<Categorias>();
+            List<Categorias> lista = new List<Categorias>();
             using (var con = _connection.GetSQLConnection())
             {
                 con.Open();
@@ -87,7 +85,7 @@ namespace PoS_Repository.Implementation
                 {
                     while (await dr.ReadAsync())
                     {
-                        list.Add(new Categorias
+                        lista.Add(new Categorias
                         {
                             Id_Categoria = Convert.ToInt32(dr["Id_Categoria"]),
                             Nombre = dr["Nombre"].ToString()!.Trim(),
@@ -102,7 +100,7 @@ namespace PoS_Repository.Implementation
                     }
                 }
 
-                return list;
+                return lista;
             }
         }
     }
