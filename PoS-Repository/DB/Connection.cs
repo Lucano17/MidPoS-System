@@ -1,5 +1,5 @@
 ﻿
-
+using dotenv.net;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
@@ -12,6 +12,8 @@ namespace PoS_Repository.DB
 
         public Connection(IConfiguration configuration)
         {
+            //DotEnv.Load();
+            //_stringSql = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")!;
             _configuration = configuration;
             _stringSql = _configuration.GetConnectionString("CadenaSql")!;
         }

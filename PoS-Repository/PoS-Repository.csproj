@@ -8,9 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="dotenv.net" Version="3.2.1" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>
