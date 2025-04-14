@@ -7,6 +7,9 @@
 # Proteger appsettings.json
 PoS-Formulario/appsettings.json
 
+# Proteger .env
+PoS-Repository/.env
+
 # User-specific files
 *.rsuser
 *.suo
