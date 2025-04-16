@@ -13,12 +13,12 @@ namespace PoS_Service.Implementation
         private readonly IConfiguration _configuration;
         private readonly Cloudinary _cloudinary;
 
-        public CloudinaryService(IConfiguration configuration, Cloudinary cloudinary)
+        public CloudinaryService(IConfiguration configuration)
         {
             _configuration = configuration;
-            var cloudName = _configuration["Cloudinary.CloudName"];
-            var apiKey = _configuration["Cloudinary.ApiKey"];
-            var apiSecret = _configuration["Cloudinary.ApiSecret"];
+            var cloudName = _configuration["Cloudinary:CloudName"];
+            var apiKey = _configuration["Cloudinary:ApiKey"];
+            var apiSecret = _configuration["Cloudinary:ApiSecret"];
 
             _cloudinary = new Cloudinary(new Account(cloudName, apiKey, apiSecret));
 
