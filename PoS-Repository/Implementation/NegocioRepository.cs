@@ -34,7 +34,7 @@ namespace PoS_Repository.Implementation
                             RazonSocial = dr["RazonSocial"].ToString()!.Trim(),
                             RUC = dr["RUC"].ToString()!.Trim(),
                             Direccion = dr["Direccion"].ToString()!.Trim(),
-                            Correo = dr["RazonSocial"].ToString()!.Trim(),
+                            Correo = dr["Correo"].ToString()!.Trim(),
                             Celular = dr["Celular"].ToString()!.Trim(),
                             Divisa = dr["Divisa"].ToString()!.Trim(),
                             NombreLogo = dr["NombreLogo"].ToString()!.Trim(),

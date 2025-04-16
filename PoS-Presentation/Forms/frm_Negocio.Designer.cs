@@ -47,7 +47,7 @@
             CelularTextBox = new TextBox();
             label9 = new Label();
             VolverButton = new Button();
-            GuardarNuevoButton = new Button();
+            GuardarButton = new Button();
             label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)LogoPictureBox).BeginInit();
             SuspendLayout();
@@ -185,6 +185,7 @@
             BuscarButton.TabIndex = 15;
             BuscarButton.Text = "Buscar";
             BuscarButton.UseVisualStyleBackColor = false;
+            BuscarButton.Click += BuscarButton_Click;
             // 
             // LogoPictureBox
             // 
@@ -225,18 +226,19 @@
             VolverButton.Text = "Volver";
             VolverButton.UseVisualStyleBackColor = false;
             // 
-            // GuardarNuevoButton
+            // GuardarButton
             // 
-            GuardarNuevoButton.BackColor = Color.White;
-            GuardarNuevoButton.Cursor = Cursors.Hand;
-            GuardarNuevoButton.FlatStyle = FlatStyle.Flat;
-            GuardarNuevoButton.ForeColor = Color.FromArgb(30, 90, 195);
-            GuardarNuevoButton.Location = new Point(582, 354);
-            GuardarNuevoButton.Name = "GuardarNuevoButton";
-            GuardarNuevoButton.Size = new Size(94, 27);
-            GuardarNuevoButton.TabIndex = 20;
-            GuardarNuevoButton.Text = "Guardar";
-            GuardarNuevoButton.UseVisualStyleBackColor = false;
+            GuardarButton.BackColor = Color.White;
+            GuardarButton.Cursor = Cursors.Hand;
+            GuardarButton.FlatStyle = FlatStyle.Flat;
+            GuardarButton.ForeColor = Color.FromArgb(30, 90, 195);
+            GuardarButton.Location = new Point(582, 354);
+            GuardarButton.Name = "GuardarButton";
+            GuardarButton.Size = new Size(94, 27);
+            GuardarButton.TabIndex = 20;
+            GuardarButton.Text = "Guardar";
+            GuardarButton.UseVisualStyleBackColor = false;
+            GuardarButton.Click += GuardarButton_Click;
             // 
             // label4
             // 
@@ -254,7 +256,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(764, 407);
             Controls.Add(label4);
-            Controls.Add(GuardarNuevoButton);
+            Controls.Add(GuardarButton);
             Controls.Add(VolverButton);
             Controls.Add(CelularTextBox);
             Controls.Add(label9);
@@ -305,7 +307,7 @@
         private TextBox CelularTextBox;
         private Label label9;
         private Button VolverButton;
-        private Button GuardarNuevoButton;
+        private Button GuardarButton;
         private Label label4;
     }
 }
