@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using PoS_Repository.Implementation;
 using PoS_Repository.Interfaces;
 
@@ -14,6 +12,8 @@ namespace PoS_Repository
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IProductoRepository, ProductoRepository>();
             services.AddTransient<INegocioRepository, NegocioRepository>();
+            services.AddTransient<IRolesRepository, RolesRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
         }
     }
 }
