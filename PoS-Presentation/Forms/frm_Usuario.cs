@@ -1,9 +1,12 @@
-﻿using PoS_Presentation.Utilities;
+﻿using CloudinaryDotNet.Actions;
+using PoS_Presentation.Utilities;
 using PoS_Presentation.Utilities.Objetos;
 using PoS_Presentation.ViewModels;
 using PoS_Repository.Entities;
+using PoS_Service.Implementation;
 using PoS_Service.Interfaces;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace PoS_Presentation.Forms
 {
@@ -168,6 +171,101 @@ namespace PoS_Presentation.Forms
                 await _correoService.Enviar(objeto.Correo, "Cuenta creada", mensaje);
 
                 MessageBox.Show("Usuario creado exitosamente");
+                await MostrarUsuarios();
+                MostrarTab(TabLista.Name);
+            }
+        }
+
+        private void UsuariosDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (UsuariosDGV.Columns[e.ColumnIndex].Name == "ColumnaAccion")
+            {
+                var usuarioSeleccionado = (UsuarioViewModel)UsuariosDGV.CurrentRow.DataBoundItem;
+                NombreEditarTextBox.Text = usuarioSeleccionado.Nombre.ToString();
+                ApellidoEditarTextBox.Text = usuarioSeleccionado.Apellido.ToString();
+                NombreUsuarioEditarTextBox.Text = usuarioSeleccionado.NombreUsuario.ToString();
+                CorreoEditarTextBox.Text = usuarioSeleccionado.Correo.ToString();
+
+                RolEditarCmbBox.EstablecerValor(usuarioSeleccionado.IdRol);
+                HabilitadoCmbBox.EstablecerValor(usuarioSeleccionado.Activo);
+
+                MostrarTab(TabEditar.Name);
+                NombreEditarTextBox.Select();
+
+            }
+        }
+
+        private void VolverEditarButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+        }
+
+        private async void GuardarEditarButton_Click(object sender, EventArgs e)
+        {
+            if (NombreEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre");
+                return;
+            }
+
+            if (ApellidoEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un apellido");
+                return;
+            }
+
+            if (NombreUsuarioEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre de usuario");
+                return;
+            }
+
+            if (CorreoEditarTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un correo");
+                return;
+            }
+
+            if (RolNuevoCmbBox.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un rol");
+                return;
+            }
+
+            if (HabilitadoCmbBox.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar una opción");
+                return;
+            }
+
+            var usuarioSeleccionado = (UsuarioViewModel)UsuariosDGV.CurrentRow.DataBoundItem;
+            if (usuarioSeleccionado.IdUsuario == 0)
+            {
+                MessageBox.Show("Error: no se está obteniendo el Id de la categoría.");
+                return;
+            }
+            var rol = ((OpcionCmbBox)RolEditarCmbBox.SelectedItem!).Valor;
+            var habilitado = ((OpcionCmbBox)HabilitadoCmbBox.SelectedItem!).Valor;
+            var objeto = new Usuario
+            {
+                Id_Usuario = usuarioSeleccionado.IdUsuario,
+                Nombre = NombreEditarTextBox.Text.Trim(),
+                Apellido = ApellidoEditarTextBox.Text.Trim(),
+                NombreUsuario = NombreUsuarioEditarTextBox.Text.Trim(),
+                Correo = CorreoEditarTextBox.Text.Trim(),
+                RefRol = new Roles { Id_Rol = rol },
+                Activo = habilitado
+            };
+
+            var respuesta = await _usuarioService.Editar(objeto);
+
+            if (respuesta != "")
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                MessageBox.Show("Usuario editado correctamente");
                 await MostrarUsuarios();
                 MostrarTab(TabLista.Name);
             }

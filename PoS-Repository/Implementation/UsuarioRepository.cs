@@ -89,7 +89,7 @@ namespace PoS_Repository.Implementation
             {
                 con.Open();
                 var cmd = new SqlCommand("sp_editarUsuario", con);
-                cmd.Parameters.AddWithValue("@Id_Categoria", objeto.Id_Usuario);
+                cmd.Parameters.AddWithValue("@Id_Usuario", objeto.Id_Usuario);
                 cmd.Parameters.AddWithValue("@Nombre", objeto.Nombre);
                 cmd.Parameters.AddWithValue("@Apellido", objeto.Apellido);
                 cmd.Parameters.AddWithValue("@NombreUsuario", objeto.NombreUsuario);

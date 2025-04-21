@@ -114,6 +114,7 @@
             UsuariosDGV.RowHeadersWidth = 51;
             UsuariosDGV.Size = new Size(691, 257);
             UsuariosDGV.TabIndex = 3;
+            UsuariosDGV.CellContentClick += UsuariosDGV_CellContentClick;
             // 
             // BuscarButton
             // 
@@ -382,6 +383,7 @@
             GuardarEditarButton.TabIndex = 17;
             GuardarEditarButton.Text = "Guardar";
             GuardarEditarButton.UseVisualStyleBackColor = false;
+            GuardarEditarButton.Click += GuardarEditarButton_Click;
             // 
             // VolverEditarButton
             // 
@@ -394,6 +396,7 @@
             VolverEditarButton.TabIndex = 16;
             VolverEditarButton.Text = "Volver";
             VolverEditarButton.UseVisualStyleBackColor = false;
+            VolverEditarButton.Click += VolverEditarButton_Click;
             // 
             // RolEditarCmbBox
             // 
