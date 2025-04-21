@@ -36,6 +36,12 @@
             BuscarTextBox = new TextBox();
             NuevoListaButton = new Button();
             TabNuevo = new TabPage();
+            NombreUsuarioNuevoTextBox = new TextBox();
+            label9 = new Label();
+            CorreoNuevoTextBox = new TextBox();
+            label8 = new Label();
+            ApellidoNuevoTextBox = new TextBox();
+            label7 = new Label();
             GuardarNuevoButton = new Button();
             VolverNuevoButton = new Button();
             RolNuevoCmbBox = new ComboBox();
@@ -43,13 +49,9 @@
             NombreNuevoTextBox = new TextBox();
             label2 = new Label();
             TabEditar = new TabPage();
-            ApellidoNuevoTextBox = new TextBox();
-            label7 = new Label();
-            CorreoNuevoTextBox = new TextBox();
-            label8 = new Label();
-            NombreEditarNuevoTextBox = new TextBox();
-            label9 = new Label();
-            NombreUsuariEditarTextBox = new TextBox();
+            HabilitadoCmbBox = new ComboBox();
+            label12 = new Label();
+            NombreUsuarioEditarTextBox = new TextBox();
             label4 = new Label();
             CorreoEditarTextBox = new TextBox();
             label5 = new Label();
@@ -61,8 +63,6 @@
             label10 = new Label();
             NombreEditarTextBox = new TextBox();
             label11 = new Label();
-            HabilitadoCmbBox = new ComboBox();
-            label12 = new Label();
             tabControlMain.SuspendLayout();
             TabLista.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)UsuariosDGV).BeginInit();
@@ -126,6 +126,7 @@
             BuscarButton.TabIndex = 2;
             BuscarButton.Text = "Buscar";
             BuscarButton.UseVisualStyleBackColor = false;
+            BuscarButton.Click += BuscarButton_Click;
             // 
             // BuscarTextBox
             // 
@@ -144,10 +145,11 @@
             NuevoListaButton.TabIndex = 0;
             NuevoListaButton.Text = "Nuevo";
             NuevoListaButton.UseVisualStyleBackColor = true;
+            NuevoListaButton.Click += NuevoListaButton_Click;
             // 
             // TabNuevo
             // 
-            TabNuevo.Controls.Add(NombreEditarNuevoTextBox);
+            TabNuevo.Controls.Add(NombreUsuarioNuevoTextBox);
             TabNuevo.Controls.Add(label9);
             TabNuevo.Controls.Add(CorreoNuevoTextBox);
             TabNuevo.Controls.Add(label8);
@@ -167,6 +169,54 @@
             TabNuevo.Text = "Nuevo";
             TabNuevo.UseVisualStyleBackColor = true;
             // 
+            // NombreUsuarioNuevoTextBox
+            // 
+            NombreUsuarioNuevoTextBox.Location = new Point(439, 108);
+            NombreUsuarioNuevoTextBox.Name = "NombreUsuarioNuevoTextBox";
+            NombreUsuarioNuevoTextBox.Size = new Size(270, 27);
+            NombreUsuarioNuevoTextBox.TabIndex = 11;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(442, 88);
+            label9.Name = "label9";
+            label9.Size = new Size(140, 20);
+            label9.TabIndex = 10;
+            label9.Text = "Nombre de usuario:";
+            // 
+            // CorreoNuevoTextBox
+            // 
+            CorreoNuevoTextBox.Location = new Point(439, 47);
+            CorreoNuevoTextBox.Name = "CorreoNuevoTextBox";
+            CorreoNuevoTextBox.Size = new Size(270, 27);
+            CorreoNuevoTextBox.TabIndex = 9;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(442, 27);
+            label8.Name = "label8";
+            label8.Size = new Size(57, 20);
+            label8.TabIndex = 8;
+            label8.Text = "Correo:";
+            // 
+            // ApellidoNuevoTextBox
+            // 
+            ApellidoNuevoTextBox.Location = new Point(24, 170);
+            ApellidoNuevoTextBox.Name = "ApellidoNuevoTextBox";
+            ApellidoNuevoTextBox.Size = new Size(270, 27);
+            ApellidoNuevoTextBox.TabIndex = 7;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(27, 150);
+            label7.Name = "label7";
+            label7.Size = new Size(66, 20);
+            label7.TabIndex = 6;
+            label7.Text = "Apellido";
+            // 
             // GuardarNuevoButton
             // 
             GuardarNuevoButton.BackColor = Color.White;
@@ -179,6 +229,7 @@
             GuardarNuevoButton.TabIndex = 5;
             GuardarNuevoButton.Text = "Guardar";
             GuardarNuevoButton.UseVisualStyleBackColor = false;
+            GuardarNuevoButton.Click += GuardarNuevoButton_Click;
             // 
             // VolverNuevoButton
             // 
@@ -191,6 +242,7 @@
             VolverNuevoButton.TabIndex = 4;
             VolverNuevoButton.Text = "Volver";
             VolverNuevoButton.UseVisualStyleBackColor = false;
+            VolverNuevoButton.Click += VolverNuevoButton_Click;
             // 
             // RolNuevoCmbBox
             // 
@@ -231,7 +283,7 @@
             // 
             TabEditar.Controls.Add(HabilitadoCmbBox);
             TabEditar.Controls.Add(label12);
-            TabEditar.Controls.Add(NombreUsuariEditarTextBox);
+            TabEditar.Controls.Add(NombreUsuarioEditarTextBox);
             TabEditar.Controls.Add(label4);
             TabEditar.Controls.Add(CorreoEditarTextBox);
             TabEditar.Controls.Add(label5);
@@ -251,60 +303,31 @@
             TabEditar.Text = "Editar";
             TabEditar.UseVisualStyleBackColor = true;
             // 
-            // ApellidoNuevoTextBox
+            // HabilitadoCmbBox
             // 
-            ApellidoNuevoTextBox.Location = new Point(24, 170);
-            ApellidoNuevoTextBox.Name = "ApellidoNuevoTextBox";
-            ApellidoNuevoTextBox.Size = new Size(270, 27);
-            ApellidoNuevoTextBox.TabIndex = 7;
+            HabilitadoCmbBox.Cursor = Cursors.Hand;
+            HabilitadoCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            HabilitadoCmbBox.FormattingEnabled = true;
+            HabilitadoCmbBox.Location = new Point(439, 170);
+            HabilitadoCmbBox.Name = "HabilitadoCmbBox";
+            HabilitadoCmbBox.Size = new Size(270, 28);
+            HabilitadoCmbBox.TabIndex = 25;
             // 
-            // label7
+            // label12
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(27, 150);
-            label7.Name = "label7";
-            label7.Size = new Size(66, 20);
-            label7.TabIndex = 6;
-            label7.Text = "Apellido";
+            label12.AutoSize = true;
+            label12.Location = new Point(442, 150);
+            label12.Name = "label12";
+            label12.Size = new Size(83, 20);
+            label12.TabIndex = 24;
+            label12.Text = "Habilitado:";
             // 
-            // CorreoNuevoTextBox
+            // NombreUsuarioEditarTextBox
             // 
-            CorreoNuevoTextBox.Location = new Point(439, 47);
-            CorreoNuevoTextBox.Name = "CorreoNuevoTextBox";
-            CorreoNuevoTextBox.Size = new Size(270, 27);
-            CorreoNuevoTextBox.TabIndex = 9;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(442, 27);
-            label8.Name = "label8";
-            label8.Size = new Size(57, 20);
-            label8.TabIndex = 8;
-            label8.Text = "Correo:";
-            // 
-            // NombreEditarNuevoTextBox
-            // 
-            NombreEditarNuevoTextBox.Location = new Point(439, 108);
-            NombreEditarNuevoTextBox.Name = "NombreEditarNuevoTextBox";
-            NombreEditarNuevoTextBox.Size = new Size(270, 27);
-            NombreEditarNuevoTextBox.TabIndex = 11;
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Location = new Point(442, 88);
-            label9.Name = "label9";
-            label9.Size = new Size(140, 20);
-            label9.TabIndex = 10;
-            label9.Text = "Nombre de usuario:";
-            // 
-            // NombreUsuariEditarTextBox
-            // 
-            NombreUsuariEditarTextBox.Location = new Point(439, 108);
-            NombreUsuariEditarTextBox.Name = "NombreUsuariEditarTextBox";
-            NombreUsuariEditarTextBox.Size = new Size(270, 27);
-            NombreUsuariEditarTextBox.TabIndex = 23;
+            NombreUsuarioEditarTextBox.Location = new Point(439, 108);
+            NombreUsuarioEditarTextBox.Name = "NombreUsuarioEditarTextBox";
+            NombreUsuarioEditarTextBox.Size = new Size(270, 27);
+            NombreUsuarioEditarTextBox.TabIndex = 23;
             // 
             // label4
             // 
@@ -407,25 +430,6 @@
             label11.TabIndex = 12;
             label11.Text = "Nombre:";
             // 
-            // HabilitadoCmbBox
-            // 
-            HabilitadoCmbBox.Cursor = Cursors.Hand;
-            HabilitadoCmbBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            HabilitadoCmbBox.FormattingEnabled = true;
-            HabilitadoCmbBox.Location = new Point(439, 170);
-            HabilitadoCmbBox.Name = "HabilitadoCmbBox";
-            HabilitadoCmbBox.Size = new Size(270, 28);
-            HabilitadoCmbBox.TabIndex = 25;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(442, 150);
-            label12.Name = "label12";
-            label12.Size = new Size(83, 20);
-            label12.TabIndex = 24;
-            label12.Text = "Habilitado:";
-            // 
             // frm_Usuario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -437,6 +441,7 @@
             Name = "frm_Usuario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "frm_Usuario";
+            Load += frm_Usuario_Load;
             tabControlMain.ResumeLayout(false);
             TabLista.ResumeLayout(false);
             TabLista.PerformLayout();
@@ -470,9 +475,9 @@
         private Label label7;
         private TextBox CorreoNuevoTextBox;
         private Label label8;
-        private TextBox NombreEditarNuevoTextBox;
+        private TextBox NombreUsuarioNuevoTextBox;
         private Label label9;
-        private TextBox NombreUsuariEditarTextBox;
+        private TextBox NombreUsuarioEditarTextBox;
         private Label label4;
         private TextBox CorreoEditarTextBox;
         private Label label5;

@@ -17,6 +17,7 @@ namespace PoS_Service
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IRolesService, RolesService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
+            services.AddTransient<ICorreoService, CorreoService>();
         }
     }
 }

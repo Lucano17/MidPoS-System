@@ -29,6 +29,8 @@ namespace PoS_Service.Implementation
         public async Task Enviar(string para, string asunto, string mensajeHtml)
         {
             _smtp = new SmtpClient();
+            // TODO: Eliminar ServerCertificate fuera del entorno de desarrollo
+            _smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
             _smtp.Connect(_host, _port, SecureSocketOptions.StartTls);
             _smtp.Authenticate(_user, _pass);
 

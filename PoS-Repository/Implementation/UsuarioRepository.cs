@@ -35,9 +35,7 @@ namespace PoS_Repository.Implementation
                             Nombre = dr["Nombre"].ToString()!.Trim(),
                             Apellido = dr["Apellido"].ToString()!.Trim(),
                             Correo = dr["Correo"].ToString()!.Trim(),
-                            Clave = dr["Clave"].ToString()!.Trim(),
                             NombreUsuario = dr["NombreUsuario"].ToString()!.Trim(),
-                            ResetearClave = Convert.ToInt32(dr["ResetearClave"]),
                             Activo = Convert.ToInt32(dr["Activo"]),
                             RefRol = new Roles
                             {

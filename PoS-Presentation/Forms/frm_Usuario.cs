@@ -1,20 +1,177 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PoS_Presentation.Utilities;
+using PoS_Presentation.Utilities.Objetos;
+using PoS_Presentation.ViewModels;
+using PoS_Repository.Entities;
+using PoS_Service.Interfaces;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PoS_Presentation.Forms
 {
-    public partial class frm_Usuario: Form
+    public partial class frm_Usuario : Form
     {
-        public frm_Usuario()
+        private readonly IRolesService _rolService;
+        private readonly IUsuarioService _usuarioService;
+        private readonly ICorreoService _correoService;
+        public frm_Usuario(IRolesService rolService, IUsuarioService usuarioService, ICorreoService correoService)
         {
             InitializeComponent();
+            _rolService = rolService;
+            _usuarioService = usuarioService;
+            _correoService = correoService;
+        }
+
+        public void MostrarTab(string tabName)
+        {
+            var TabsMenu = new TabPage[] { TabLista, TabNuevo, TabEditar };
+
+            foreach (var tab in TabsMenu)
+            {
+                if (tab.Name != tabName)
+                {
+                    tab.Parent = null;
+                }
+                else
+                {
+                    tab.Parent = tabControlMain;
+                }
+            }
+        }
+
+        private async Task MostrarUsuarios(string buscar = "")
+        {
+            var listaUsuarios = await _usuarioService.Lista(buscar);
+            var listaViewModel = listaUsuarios.Select(item => new UsuarioViewModel
+            {
+                IdUsuario = item.Id_Usuario,
+                Nombre = item.Nombre,
+                Apellido = item.Apellido,
+                NombreUsuario = item.NombreUsuario,
+                Correo = item.Correo,
+                IdRol = item.RefRol.Id_Rol,
+                Rol = item.RefRol.Nombre,
+                Activo = item.Activo,
+                Habilitado = item.Activo == 1 ? "SI" : "NO"
+            }).ToList();
+            UsuariosDGV.DataSource = listaViewModel;
+
+            UsuariosDGV.Columns["NombreCompleto"].DisplayIndex = 1;
+            UsuariosDGV.Columns["NombreCompleto"].HeaderText = "Nombre Completo";
+            UsuariosDGV.Columns["NombreUsuario"].HeaderText = "Nombre de Usuario";
+
+            UsuariosDGV.Columns["Nombre"].Visible = false;
+            UsuariosDGV.Columns["Apellido"].Visible = false;
+            UsuariosDGV.Columns["IdUsuario"].Visible = false;
+            UsuariosDGV.Columns["IdRol"].Visible = false;
+            UsuariosDGV.Columns["Activo"].Visible = false;
+        }
+
+        private async void frm_Usuario_Load(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+            UsuariosDGV.ImplementarConfiguracion("Editar");
+            await MostrarUsuarios();
+
+            UsuariosDGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            OpcionCmbBox[] itemsHabilitado = new OpcionCmbBox[]
+            {
+                new OpcionCmbBox {Texto = "Si", Valor = 1},
+                new OpcionCmbBox {Texto = "No", Valor = 0}
+            };
+
+            var listaRol = await _rolService.Lista();
+            var items = listaRol.Select(item => new OpcionCmbBox
+            {
+                Texto = item.Nombre,
+                Valor = item.Id_Rol
+            }).ToArray();
+            HabilitadoCmbBox.InsertarItems(itemsHabilitado);
+            RolNuevoCmbBox.InsertarItems(items);
+            RolEditarCmbBox.InsertarItems(items);
+        }
+
+        private async void BuscarButton_Click(object sender, EventArgs e)
+        {
+            await MostrarUsuarios(BuscarTextBox.Text);
+        }
+
+        private void NuevoListaButton_Click(object sender, EventArgs e)
+        {
+            NombreNuevoTextBox.Text = "";
+            ApellidoNuevoTextBox.Text = "";
+            NombreUsuarioNuevoTextBox.Text = "";
+            CorreoNuevoTextBox.Text = "";
+            RolNuevoCmbBox.SelectedIndex = 0;
+            NombreNuevoTextBox.Select();
+            MostrarTab(TabNuevo.Name);
+        }
+
+        private void VolverNuevoButton_Click(object sender, EventArgs e)
+        {
+            MostrarTab(TabLista.Name);
+        }
+
+        private async void GuardarNuevoButton_Click(object sender, EventArgs e)
+        {
+            if (NombreNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre");
+                return;
+            }
+
+            if (ApellidoNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un apellido");
+                return;
+            }
+
+            if (NombreUsuarioNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un nombre de usuario");
+                return;
+            }
+
+            if (CorreoNuevoTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Debe ingresar un correo");
+                return;
+            }
+
+            if (RolNuevoCmbBox.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un rol");
+                return;
+            }
+
+            var claveGenerada = Util.GenerateCode();
+            var claveSHA256 = Util.ConvertToSha256(claveGenerada);
+            var rol = ((OpcionCmbBox)RolNuevoCmbBox.SelectedItem!).Valor;
+            var objeto = new Usuario
+            {
+                Nombre = NombreNuevoTextBox.Text.Trim(),
+                Apellido = ApellidoNuevoTextBox.Text.Trim(),
+                NombreUsuario = NombreUsuarioNuevoTextBox.Text.Trim(),
+                Correo = CorreoNuevoTextBox.Text.Trim(),
+                Clave = claveSHA256,
+                RefRol = new Roles { Id_Rol = rol }
+            };
+
+            var respuesta = await _usuarioService.Crear(objeto);
+
+            if (!string.IsNullOrEmpty(respuesta))
+            {
+                MessageBox.Show(respuesta);
+            }
+            else
+            {
+                var mensaje = $"Bienvenido</br>Su contraseña temporal es: {claveGenerada}";
+                await _correoService.Enviar(objeto.Correo, "Cuenta creada", mensaje);
+
+                MessageBox.Show("Usuario creado exitosamente");
+                await MostrarUsuarios();
+                MostrarTab(TabLista.Name);
+            }
         }
     }
 }
+
