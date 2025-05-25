@@ -119,6 +119,43 @@ namespace PoS_Repository.Implementation
             }
         }
 
+        public async Task<Productos> Obtener(string codigo)
+        {
+            Productos objeto = new Productos();
+            using (var con = _connection.GetSQLConnection())
+            {
+                con.Open();
+                var cmd = new SqlCommand("sp_obtenerProducto", con);
+                cmd.Parameters.AddWithValue("@Codigo", codigo);
+                cmd.CommandType = CommandType.StoredProcedure;
 
+                using (var dr = await cmd.ExecuteReaderAsync())
+                {
+                    if (await dr.ReadAsync())
+                    {
+                        objeto = new Productos
+                        {
+                            Id_Producto = Convert.ToInt32(dr["Id_Producto"]),
+                            Nombre = dr["NombreProducto"].ToString()!.Trim(),
+                            RefCategoria = new Categorias
+                            {
+                                Nombre = dr["NombreCategoria"].ToString()!.Trim(),
+                                RefMedida = new Medidas
+                                {
+                                    Equivalente = dr["Equivalente"].ToString()!.Trim(),
+                                    Valor = Convert.ToInt32(dr["Valor"]),
+                                }
+                            },
+                            Codigo = dr["Codigo"].ToString()!.Trim(),
+                            PrecioVenta = Convert.ToDecimal(dr["PrecioVenta"]),
+                            Stock = Convert.ToInt32(dr["Stock"]),
+                        };
+
+                    }
+                }
+
+                return objeto;
+            }
+        }
     }
 }

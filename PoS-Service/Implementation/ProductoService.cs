@@ -29,6 +29,9 @@ namespace PoS_Service.Implementation
             return await _productoRepository.Editar(objeto);
         }
 
-
+        public async Task<Productos> Obtener(string codigo)
+        {
+            return await _productoRepository.Obtener(codigo);
+        }
     }
 }

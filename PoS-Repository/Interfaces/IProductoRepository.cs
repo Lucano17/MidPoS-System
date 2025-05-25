@@ -8,5 +8,6 @@ namespace PoS_Repository.Interfaces
         Task<List<Productos>> Lista(string buscar = "");
         Task<string> Crear(Productos objeto);
         Task<string> Editar(Productos objeto);
+        Task<Productos> Obtener(string codigo);
     }
 }
