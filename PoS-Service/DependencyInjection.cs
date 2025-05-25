@@ -18,6 +18,7 @@ namespace PoS_Service
             services.AddTransient<IRolesService, RolesService>();
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<ICorreoService, CorreoService>();
+            services.AddTransient<IVentaService, VentaService>();
         }
     }
 }
