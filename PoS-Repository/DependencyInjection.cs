@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PoS_Repository.Implementation;
 using PoS_Repository.Interfaces;
+using PoS_Service.Interfaces;
 
 namespace PoS_Repository
 {
@@ -14,6 +15,7 @@ namespace PoS_Repository
             services.AddTransient<INegocioRepository, NegocioRepository>();
             services.AddTransient<IRolesRepository, RolesRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            services.AddTransient<IVentaRepository, VentaRepository>();
         }
     }
 }
