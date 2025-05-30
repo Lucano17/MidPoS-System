@@ -71,6 +71,7 @@
             RegistrarButton.TabIndex = 41;
             RegistrarButton.Text = "Registrar";
             RegistrarButton.UseVisualStyleBackColor = false;
+            RegistrarButton.Click += RegistrarButton_Click;
             // 
             // VolverButton
             // 
@@ -91,6 +92,7 @@
             BuscarButton.Size = new Size(86, 30);
             BuscarButton.TabIndex = 49;
             BuscarButton.Text = "Buscar";
+            BuscarButton.Click += BuscarButton_Click;
             // 
             // PagoConTextBox
             // 
@@ -99,6 +101,7 @@
             PagoConTextBox.Name = "PagoConTextBox";
             PagoConTextBox.Size = new Size(159, 27);
             PagoConTextBox.TabIndex = 29;
+            PagoConTextBox.KeyDown += PagoConTextBox_KeyDown;
             // 
             // label5
             // 
@@ -130,11 +133,11 @@
             // 
             // CodigoProductoTextBox
             // 
-            CodigoProductoTextBox.BackColor = Color.White;
-            CodigoProductoTextBox.Location = new Point(12, 74);
+            CodigoProductoTextBox.Location = new Point(12, 77);
             CodigoProductoTextBox.Name = "CodigoProductoTextBox";
-            CodigoProductoTextBox.Size = new Size(171, 27);
-            CodigoProductoTextBox.TabIndex = 25;
+            CodigoProductoTextBox.Size = new Size(158, 27);
+            CodigoProductoTextBox.TabIndex = 50;
+            CodigoProductoTextBox.KeyDown += CodigoProductoTextBox_KeyDown;
             // 
             // label2
             // 
@@ -208,6 +211,7 @@
             DetalleVentaDGV.RowHeadersWidth = 51;
             DetalleVentaDGV.Size = new Size(740, 215);
             DetalleVentaDGV.TabIndex = 48;
+            DetalleVentaDGV.CellContentClick += DetalleVentaDGV_CellContentClick;
             // 
             // label7
             // 

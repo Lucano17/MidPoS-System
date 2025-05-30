@@ -21,25 +21,47 @@ namespace PoS_Repository.Implementation
             using (var con = _connection.GetSQLConnection())
             {
                 con.Open();
-                var cmd = new SqlCommand("sp_registarVenta", con);
+                var cmd = new SqlCommand("sp_registrarVenta", con);
                 cmd.Parameters.AddWithValue("@VentaXML", ventaXML);
-                cmd.Parameters.Add("@NumeroVenta", SqlDbType.VarChar, 10).Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@NumeroVenta", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 try
                 {
+                    //
+                    Console.WriteLine("VENTA XML ENVIADO:");
+                    Console.WriteLine(ventaXML);
+
                     await cmd.ExecuteNonQueryAsync();
-                    response = Convert.ToString(cmd.Parameters["@NumeroVenta"].Value)!;
+                    //
+                    Console.WriteLine("NumeroVenta devuelto: " + Convert.ToString(cmd.Parameters["@NumeroVenta"].Value));
+
+                    if (cmd.Parameters["@NumeroVenta"].Value == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(cmd.Parameters["@NumeroVenta"].Value)))
+                    {
+                        response = "Error(rp): No se pudo procesar la venta. El SP no devolvió un número de venta.";
+                    }
+                    else
+                    {
+                        try
+                        {
+                            response = Convert.ToString(cmd.Parameters["@NumeroVenta"].Value)!;
+                        }
+                        catch (SqlException ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    }
                 }
                 catch (Exception error)
                 {
-                    response = "Error(rp): No se pudo procesar" + error.Message;
+                    Console.WriteLine(error.Message);
+                    response = "Error(rp): No se pudo procesar - " + error.Message;
                 }
-
 
                 return response;
             }
         }
+
         public async Task<Venta> Obtener(string numeroVenta)
         {
             Venta objeto = new Venta();
@@ -82,7 +104,7 @@ namespace PoS_Repository.Implementation
             using (var con = _connection.GetSQLConnection())
             {
                 con.Open();
-                var cmd = new SqlCommand("sp_obtenerVenta", con);
+                var cmd = new SqlCommand("sp_detalleVenta", con);
                 cmd.Parameters.AddWithValue("@NumeroVenta", numeroVenta);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -95,12 +117,12 @@ namespace PoS_Repository.Implementation
 
                             RefProducto = new Productos()
                             {
-                                Nombre = dr["Nombre"].ToString()!.Trim(),
+                                Nombre = dr["Nombre"].ToString()!,
                                 RefCategoria = new Categorias()
                                 {
                                     RefMedida = new Medidas()
                                     {
-                                        Abreviatura = dr["Abreviatura"].ToString()!.Trim(),
+                                        Abreviatura = dr["Abreviatura"].ToString()!,
                                         Valor = Convert.ToInt32(dr["Valor"]),
                                     }
                                 }

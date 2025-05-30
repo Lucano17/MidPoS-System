@@ -3,11 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PoS_Presentation.Forms;
 using PoS_Repository;
-using PoS_Repository.Implementation;
-using PoS_Repository.Interfaces;
 using PoS_Service;
-using PoS_Service.Implementation;
-using PoS_Service.Interfaces;
 
 namespace PoS_Presentation
 {
@@ -24,7 +20,7 @@ namespace PoS_Presentation
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
 
-            var formService = host.Services.GetRequiredService<frm_Usuario>(); //Form1
+            var formService = host.Services.GetRequiredService<frm_Venta>(); //Form1
 
             Application.Run(formService);
         }
@@ -43,6 +39,8 @@ namespace PoS_Presentation
                 services.AddTransient<frm_Producto>();
                 services.AddTransient<frm_Negocio>();
                 services.AddTransient<frm_Usuario>();
+                services.AddTransient<frm_Venta>();
+                services.AddTransient<frm_BuscarProducto>();
 
             });
     }

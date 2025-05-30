@@ -104,7 +104,7 @@ namespace PoS_Presentation.Utilities
                                     string abreviatura = item.RefProducto.RefCategoria.RefMedida.Abreviatura;
 
                                     table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2)
-                                        .Text(item.RefProducto.Descripcion).FontSize(10);
+                                        .Text(item.RefProducto.Nombre).FontSize(10);
 
                                     table.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2)
                                         .Text($"{oNegocio.Divisa} {item.PrecioVenta.ToString("0.00")}").FontSize(10);
@@ -117,7 +117,7 @@ namespace PoS_Presentation.Utilities
                                 }
                             });
                         });
-                        col1.Item().AlignRight().Text($"{oNegocio.Divisa} {oVenta.PrecioTotal.ToString("0.00")});
+                        col1.Item().AlignRight().Text($"{oNegocio.Divisa} {oVenta.PrecioTotal.ToString("0.00")}");
                     });
 
                     page.Footer().AlignRight().Text(txt =>
