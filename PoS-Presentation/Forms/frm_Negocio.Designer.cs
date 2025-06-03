@@ -45,7 +45,6 @@
             emailTextBox = new TextBox();
             rucLabel = new Label();
             rucTextBox = new TextBox();
-            label1 = new Label();
             RazonSocialTextBox = new TextBox();
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)LogoPictureBox).BeginInit();
@@ -218,13 +217,6 @@
             rucTextBox.Size = new Size(270, 27);
             rucTextBox.TabIndex = 6;
             // 
-            // label1
-            // 
-            label1.Location = new Point(0, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(100, 23);
-            label1.TabIndex = 22;
-            // 
             // RazonSocialTextBox
             // 
             RazonSocialTextBox.BackColor = Color.White;
@@ -266,7 +258,6 @@
             Controls.Add(rucLabel);
             Controls.Add(RazonSocialTextBox);
             Controls.Add(label2);
-            Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "frm_Negocio";
             StartPosition = FormStartPosition.CenterScreen;
@@ -296,7 +287,6 @@
         private TextBox emailTextBox;
         private Label rucLabel;
         private TextBox rucTextBox;
-        private Label label1;
         private TextBox RazonSocialTextBox;
         private Label label2;
     }
