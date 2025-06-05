@@ -29,5 +29,10 @@ namespace PoS_Service.Implementation
         {
             return await _ventaRepository.Lista(fechaInicio, fechaFin, buscar);
         }
+
+        public async Task<List<DetalleVenta>> ReporteVenta(string fechaInicio, string fechaFin)
+        {
+            return await _ventaRepository.ReporteVenta(fechaInicio, fechaFin);
+        }
     }
 }

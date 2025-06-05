@@ -231,7 +231,7 @@ namespace PoS_Presentation.Forms
             HabilitadoCmbBox.Name = "HabilitadoCmbBox";
             HabilitadoCmbBox.Size = new Size(270, 28);
             HabilitadoCmbBox.TabIndex = 13;
-            HabilitadoCmbBox.SelectedIndexChanged += HabilitadoCmbBox_SelectedIndexChanged;
+            //HabilitadoCmbBox.SelectedIndexChanged += HabilitadoCmbBox_SelectedIndexChanged;
             // 
             // label6
             // 

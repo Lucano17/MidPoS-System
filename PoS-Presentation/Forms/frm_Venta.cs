@@ -161,9 +161,8 @@ namespace PoS_Presentation.Forms
                 ? 0
                 : Convert.ToDecimal(CambioTextBox.Text.Trim());
 
-            // TODO: Ingresar el ID del usuario logueado
             XElement venta = new XElement("Venta",
-                new XElement("Id_UsuarioRegistro", 1),
+                new XElement("Id_UsuarioRegistro", UsuarioSesion.Id_Usuario),
                 new XElement("NombreCliente", NombreClienteTextBox.Text.Trim()),
                 new XElement("PrecioTotal", precioTotal),
                 new XElement("PagoCon", pagoCon),

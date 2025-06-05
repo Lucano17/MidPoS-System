@@ -20,7 +20,7 @@ namespace PoS_Presentation
             ApplicationConfiguration.Initialize();
             var host = CreateHostBuilder().Build();
 
-            var formService = host.Services.GetRequiredService<frm_Historial>(); //Form1
+            var formService = host.Services.GetRequiredService<frm_Login>(); //Form1
 
             Application.Run(formService);
         }
@@ -43,6 +43,9 @@ namespace PoS_Presentation
                 services.AddTransient<frm_BuscarProducto>();
                 services.AddTransient<frm_Historial>();
                 services.AddTransient<frm_DetalleVenta>();
+                services.AddTransient<frm_ReporteVenta>();
+                services.AddTransient<frm_Login>();
+                services.AddTransient<frm_ActualizarClave>();
 
             });
     }

@@ -28,8 +28,8 @@ namespace PoS_Presentation.Utilities
                 {
                     builder.Append(bytes[i].ToString("x2"));
                 }
+                return builder.ToString();
             }
-            return "";
         }
 
         public static byte[] GeneratePDFVenta(Negocio oNegocio, Venta oVenta, Stream ImagenLogo)
