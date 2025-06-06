@@ -46,6 +46,7 @@ namespace PoS_Presentation
                 services.AddTransient<frm_ReporteVenta>();
                 services.AddTransient<frm_Login>();
                 services.AddTransient<frm_ActualizarClave>();
+                services.AddTransient<Layout>();
 
             });
     }

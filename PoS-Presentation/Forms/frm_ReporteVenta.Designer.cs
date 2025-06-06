@@ -33,7 +33,6 @@
             FechaInicioDTP = new DateTimePicker();
             label4 = new Label();
             ExcelButton = new Button();
-            VolverButton = new Button();
             rucLabel = new Label();
             label2 = new Label();
             BuscarButton = new Button();
@@ -46,7 +45,7 @@
             ReporteDataGridView.Location = new Point(12, 117);
             ReporteDataGridView.Name = "ReporteDataGridView";
             ReporteDataGridView.RowHeadersWidth = 51;
-            ReporteDataGridView.Size = new Size(740, 231);
+            ReporteDataGridView.Size = new Size(740, 278);
             ReporteDataGridView.TabIndex = 55;
             // 
             // FechaFinDTP
@@ -88,18 +87,6 @@
             ExcelButton.Text = "Excel";
             ExcelButton.UseVisualStyleBackColor = false;
             ExcelButton.Click += ExcelButton_Click;
-            // 
-            // VolverButton
-            // 
-            VolverButton.BackColor = Color.White;
-            VolverButton.Cursor = Cursors.Hand;
-            VolverButton.FlatStyle = FlatStyle.Flat;
-            VolverButton.Location = new Point(632, 365);
-            VolverButton.Name = "VolverButton";
-            VolverButton.Size = new Size(94, 27);
-            VolverButton.TabIndex = 50;
-            VolverButton.Text = "Volver";
-            VolverButton.UseVisualStyleBackColor = false;
             // 
             // rucLabel
             // 
@@ -144,7 +131,6 @@
             Controls.Add(FechaInicioDTP);
             Controls.Add(label4);
             Controls.Add(ExcelButton);
-            Controls.Add(VolverButton);
             Controls.Add(rucLabel);
             Controls.Add(label2);
             FormBorderStyle = FormBorderStyle.None;
@@ -164,7 +150,6 @@
         private DateTimePicker FechaInicioDTP;
         private Label label4;
         private Button ExcelButton;
-        private Button VolverButton;
         private Label rucLabel;
         private Label label2;
         private Button BuscarButton;

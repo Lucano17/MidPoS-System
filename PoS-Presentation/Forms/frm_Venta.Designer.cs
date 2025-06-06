@@ -30,7 +30,6 @@
         {
             label4 = new Label();
             RegistrarButton = new Button();
-            VolverButton = new Button();
             BuscarButton = new Button();
             PagoConTextBox = new TextBox();
             label5 = new Label();
@@ -72,18 +71,6 @@
             RegistrarButton.Text = "Registrar";
             RegistrarButton.UseVisualStyleBackColor = false;
             RegistrarButton.Click += RegistrarButton_Click;
-            // 
-            // VolverButton
-            // 
-            VolverButton.BackColor = Color.White;
-            VolverButton.Cursor = Cursors.Hand;
-            VolverButton.FlatStyle = FlatStyle.Flat;
-            VolverButton.Location = new Point(554, 141);
-            VolverButton.Name = "VolverButton";
-            VolverButton.Size = new Size(94, 27);
-            VolverButton.TabIndex = 40;
-            VolverButton.Text = "Volver";
-            VolverButton.UseVisualStyleBackColor = false;
             // 
             // BuscarButton
             // 
@@ -234,7 +221,6 @@
             Controls.Add(label3);
             Controls.Add(label4);
             Controls.Add(RegistrarButton);
-            Controls.Add(VolverButton);
             Controls.Add(CambioTextBox);
             Controls.Add(label9);
             Controls.Add(BuscarButton);
@@ -259,7 +245,6 @@
 
         private Label label4;
         private Button RegistrarButton;
-        private Button VolverButton;
         private Button BuscarButton;
         private TextBox PagoConTextBox;
         private Label label5;

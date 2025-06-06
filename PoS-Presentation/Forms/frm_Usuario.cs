@@ -15,7 +15,8 @@ namespace PoS_Presentation.Forms
         private readonly IRolesService _rolService;
         private readonly IUsuarioService _usuarioService;
         private readonly ICorreoService _correoService;
-        public frm_Usuario(IRolesService rolService, IUsuarioService usuarioService, ICorreoService correoService)
+        public frm_Usuario(IRolesService rolService, IUsuarioService usuarioService,
+            ICorreoService correoService)
         {
             InitializeComponent();
             _rolService = rolService;
@@ -88,6 +89,7 @@ namespace PoS_Presentation.Forms
                 Texto = item.Nombre,
                 Valor = item.Id_Rol
             }).ToArray();
+
             HabilitadoCmbBox.InsertarItems(itemsHabilitado);
             RolNuevoCmbBox.InsertarItems(items);
             RolEditarCmbBox.InsertarItems(items);

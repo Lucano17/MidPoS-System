@@ -16,6 +16,7 @@ namespace PoS_Repository
             services.AddTransient<IRolesRepository, RolesRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IVentaRepository, VentaRepository>();
+            services.AddTransient<IMenuRolRepository, MenuRolRepository>();
         }
     }
 }

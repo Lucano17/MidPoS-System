@@ -30,7 +30,6 @@
         {
             label4 = new Label();
             BuscarButton = new Button();
-            VolverButton = new Button();
             EncontrarTextBox = new TextBox();
             label6 = new Label();
             rucLabel = new Label();
@@ -64,18 +63,6 @@
             BuscarButton.Text = "Buscar";
             BuscarButton.UseVisualStyleBackColor = false;
             BuscarButton.Click += BuscarButton_Click;
-            // 
-            // VolverButton
-            // 
-            VolverButton.BackColor = Color.White;
-            VolverButton.Cursor = Cursors.Hand;
-            VolverButton.FlatStyle = FlatStyle.Flat;
-            VolverButton.Location = new Point(632, 368);
-            VolverButton.Name = "VolverButton";
-            VolverButton.Size = new Size(94, 27);
-            VolverButton.TabIndex = 40;
-            VolverButton.Text = "Volver";
-            VolverButton.UseVisualStyleBackColor = false;
             // 
             // EncontrarTextBox
             // 
@@ -136,7 +123,7 @@
             VentaDataGridView.Location = new Point(12, 120);
             VentaDataGridView.Name = "VentaDataGridView";
             VentaDataGridView.RowHeadersWidth = 51;
-            VentaDataGridView.Size = new Size(740, 231);
+            VentaDataGridView.Size = new Size(740, 275);
             VentaDataGridView.TabIndex = 45;
             VentaDataGridView.CellContentClick += VentaDataGridView_CellContentClick;
             // 
@@ -150,7 +137,6 @@
             Controls.Add(FechaInicioDTP);
             Controls.Add(label4);
             Controls.Add(BuscarButton);
-            Controls.Add(VolverButton);
             Controls.Add(EncontrarTextBox);
             Controls.Add(label6);
             Controls.Add(rucLabel);
@@ -169,7 +155,6 @@
 
         private Label label4;
         private Button BuscarButton;
-        private Button VolverButton;
         private TextBox EncontrarTextBox;
         private Label label6;
         private Label rucLabel;

@@ -61,8 +61,7 @@ namespace PoS_Presentation.Forms
                 UsuarioSesion.Id_Rol = encontrado.RefRol.Id_Rol;
                 UsuarioSesion.Rol = encontrado.RefRol.Nombre;
 
-                // TODO: Actualizar formulario layout
-                var formLayout = _serviceProvider.GetRequiredService<frm_Categoria>();
+                var formLayout = _serviceProvider.GetRequiredService<Layout>();
                 this.Hide();
                 UsuarioTextBox.Text = "";
                 ClaveTextBox.Text = "";

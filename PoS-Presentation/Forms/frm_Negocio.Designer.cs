@@ -30,7 +30,6 @@
         {
             label4 = new Label();
             GuardarButton = new Button();
-            VolverButton = new Button();
             label9 = new Label();
             CelularTextBox = new TextBox();
             LogoPictureBox = new PictureBox();
@@ -73,18 +72,6 @@
             GuardarButton.Text = "Guardar";
             GuardarButton.UseVisualStyleBackColor = false;
             GuardarButton.Click += GuardarButton_Click;
-            // 
-            // VolverButton
-            // 
-            VolverButton.BackColor = Color.White;
-            VolverButton.Cursor = Cursors.Hand;
-            VolverButton.FlatStyle = FlatStyle.Flat;
-            VolverButton.Location = new Point(452, 354);
-            VolverButton.Name = "VolverButton";
-            VolverButton.Size = new Size(94, 27);
-            VolverButton.TabIndex = 19;
-            VolverButton.Text = "Volver";
-            VolverButton.UseVisualStyleBackColor = false;
             // 
             // label9
             // 
@@ -241,7 +228,6 @@
             ClientSize = new Size(764, 407);
             Controls.Add(label4);
             Controls.Add(GuardarButton);
-            Controls.Add(VolverButton);
             Controls.Add(CelularTextBox);
             Controls.Add(label9);
             Controls.Add(LogoPictureBox);
@@ -272,7 +258,6 @@
 
         private Label label4;
         private Button GuardarButton;
-        private Button VolverButton;
         private Label label9;
         private TextBox CelularTextBox;
         private PictureBox LogoPictureBox;
